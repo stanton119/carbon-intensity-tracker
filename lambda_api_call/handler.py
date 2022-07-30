@@ -1,4 +1,3 @@
-import json
 from typing import Dict
 import requests
 import datetime
@@ -15,13 +14,21 @@ table = dynamodb.Table("carbonForecast")
 
 
 def lambda_handler(event, context):
-    forecast = get_forecast()
+    # {
+    # "postcode": null,
+    # "forecast_date": null
+    # }
+    forecast = get_forecast(event["postcode"], event["forecast_date"])
     logger.info(f"Saving forecast to dynamo db, index={forecast['forecast_date']}")
     return table.put_item(Item=forecast)
 
 
-def get_forecast(postcode: str = "SW7") -> Dict:
-    request_date = datetime.date.today()
+def get_forecast(postcode: str = "SW7", forecast_date: str = None) -> Dict:
+    if forecast_date is None:
+        request_date = datetime.date.today()
+    else:
+        request_date = datetime.datetime.strptime(forecast_date, "%Y-%m-%d").date()
+
     result = requests.get(
         f"https://api.carbonintensity.org.uk/regional/intensity/{request_date.isoformat()}/fw48h/postcode/{postcode}"
     )

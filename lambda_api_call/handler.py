@@ -18,7 +18,7 @@ def lambda_handler(event, context):
     # "postcode": null,
     # "forecast_date": null
     # }
-    forecast = get_forecast(event["postcode"], event["forecast_date"])
+    forecast = get_forecast(event.get("postcode"), event.get("forecast_date"))
     logger.info(f"Saving forecast to dynamo db, index={forecast['forecast_date']}")
     return table.put_item(Item=forecast)
 

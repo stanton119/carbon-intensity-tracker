@@ -1,0 +1,17 @@
+boto3
+awscli
+requests
+aws-cdk-lib
+constructs
+pytest
+
+numpy
+pandas
+matplotlib
+seaborn
+
+jupyter
+pylint
+rope
+black
+isort

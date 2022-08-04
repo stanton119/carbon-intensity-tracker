@@ -1,15 +1,20 @@
+# cdk stuff
+aws-cdk-lib
+constructs
+
+# lambda stuff
 boto3
 awscli
 requests
-aws-cdk-lib
-constructs
 pytest
 
+# analysis stuff
 numpy
 pandas
 matplotlib
 seaborn
 
+# dev stuff
 jupyter
 pylint
 rope

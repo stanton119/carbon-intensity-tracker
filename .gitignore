@@ -1,6 +1,6 @@
 .aws/
-*/cdk.out
-*/.venv
+cdk.out
+.venv
 __pycache__
 
 lambda_api_call/lambda_deploy.zip

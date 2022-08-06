@@ -1,0 +1,6 @@
+.aws/
+*/cdk.out
+*/.venv
+
+lambda_api_call/lambda_deploy.zip
+lambda_api_call/package/

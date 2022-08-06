@@ -1,0 +1,22 @@
+# cdk stuff
+aws-cdk-lib
+constructs
+
+# lambda stuff
+boto3
+awscli
+requests
+pytest
+
+# analysis stuff
+numpy
+pandas
+matplotlib
+seaborn
+
+# dev stuff
+jupyter
+pylint
+rope
+black
+isort

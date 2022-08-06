@@ -4,10 +4,13 @@ channels:
 dependencies:
   - python
   - pip
+  # - npm
   
   - boto3
   - awscli
   - requests
+  - pytest
+  - pydantic
   
   # Computation
   - numpy
@@ -23,3 +26,7 @@ dependencies:
   - rope
   - black
   - isort
+
+  - pip:
+    - aws-cdk-lib
+    - constructs

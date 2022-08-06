@@ -1,13 +1,10 @@
 import subprocess
 from pathlib import Path
 
-from aws_cdk import (
-    App,
-    Duration,
-    Stack,
-    pipelines,
-)
+from aws_cdk import App, Duration, Stack, pipelines
 from constructs import Construct
+
+import lambda_api_call
 
 
 class CodePipelineStack(Stack):
@@ -28,6 +25,8 @@ class CodePipelineStack(Stack):
                     "python -m pip install -r cdk_bootstrap/requirements.txt",
                     "cd cdk_bootstrap/; cdk synth",
                 ],
-                primary_output_directory="cdk_bootstrap/"
+                primary_output_directory="cdk_bootstrap/",
             ),
         )
+
+        pipeline.add_stage(lambda_api_call.MyPipelineAppStage(self, "test"))

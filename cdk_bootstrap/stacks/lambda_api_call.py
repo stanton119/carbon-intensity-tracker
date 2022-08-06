@@ -10,6 +10,7 @@ from aws_cdk import (
     aws_events_targets,
     aws_lambda,
     aws_s3,
+    Stage,
 )
 from constructs import Construct
 
@@ -28,8 +29,8 @@ def make_package_zip():
 
 
 class LambdaAPICallStack(Stack):
-    def __init__(self, app: App, id: str) -> None:
-        super().__init__(app, id)
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
+        super().__init__(scope, construct_id, **kwargs)
 
         # create dynamoDB
         dynamo_table = aws_dynamodb.Table(
@@ -69,3 +70,10 @@ class LambdaAPICallStack(Stack):
             schedule=aws_events.Schedule.cron(minute="0", hour="2"),
         )
         daily_rule.add_target(aws_events_targets.LambdaFunction(lambda_carbon_call))
+
+
+class MyPipelineAppStage(Stage):
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
+        super().__init__(scope, construct_id, **kwargs)
+
+        lambdaStack = LambdaAPICallStack(self, "LambdaStack")

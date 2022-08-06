@@ -25,7 +25,7 @@ class CodePipelineStack(Stack):
                     "python -m pip install -r cdk_bootstrap/requirements.txt",
                     "cd cdk_bootstrap/; cdk synth",
                 ],
-                primary_output_directory="cdk_bootstrap/",
+                primary_output_directory="cdk_bootstrap/cdk.out",
             ),
         )
 

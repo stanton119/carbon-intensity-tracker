@@ -45,14 +45,18 @@ def lambda_handler(event, context):
         f"Saving forecast to s3, bucket={BUCKET_NAME}, index={forecast['forecast_date']}"
     )
     try:
-        buffer = io.BytesIO(initial_bytes=forecast['raw_json'].encode('utf-8'))
-        bucket.upload_fileobj(buffer, f"carbon_api_raw/{forecast['forecast_date']}/0.json")
+        buffer = io.BytesIO(initial_bytes=forecast["raw_json"].encode("utf-8"))
+        bucket.upload_fileobj(
+            buffer, f"carbon_api_raw/{forecast['forecast_date']}/0.json"
+        )
     except botocore.exceptions.ClientError as e:
         logging.error(e)
     return True
 
 
-def get_forecast(postcode: str = "SW7", forecast_date: str = None) -> Dict:
+def get_forecast(postcode: str = None, forecast_date: str = None) -> Dict:
+    if postcode is None:
+        postcode = "SW7"
     if forecast_date is None:
         request_date = datetime.date.today()
     else:

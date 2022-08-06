@@ -4,7 +4,7 @@ from pathlib import Path
 from aws_cdk import App, Duration, Stack, pipelines
 from constructs import Construct
 
-import lambda_api_call
+from . import lambda_api_call
 
 
 class CodePipelineStack(Stack):

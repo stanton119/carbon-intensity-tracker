@@ -25,9 +25,8 @@ class CodePipelineStack(Stack):
                 ),
                 commands=[
                     "npm install -g aws-cdk",
-                    "cd cdk_bootstrap/",
-                    "python -m pip install -r requirements.txt",
-                    "cdk synth",
+                    "python -m pip install -r cdk_bootstrap/requirements.txt",
+                    "cd cdk_bootstrap/; cdk synth",
                 ],
             ),
         )

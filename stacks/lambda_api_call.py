@@ -16,7 +16,7 @@ from constructs import Construct
 
 
 def make_package_zip():
-    deploy_sh_path = Path(__file__).resolve().parents[2] / "lambda_api_call"
+    deploy_sh_path = Path(__file__).resolve().parents[1] / "lambda_api_call"
     print(deploy_sh_path)
     subprocess.run(
         [

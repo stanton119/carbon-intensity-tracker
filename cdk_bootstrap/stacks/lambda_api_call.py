@@ -44,7 +44,12 @@ class LambdaAPICallStack(Stack):
         )
 
         # create s3 bucket for saving results
-        s3_bucket = aws_s3.Bucket(self, "carbon_s3_bucket", versioned=True)
+        s3_bucket = aws_s3.Bucket(
+            self,
+            "carbon_s3_bucket",
+            versioned=True,
+            block_public_access=aws_s3.BlockPublicAccess.BLOCK_ALL,
+        )
 
         # create lambda
         zip_path = make_package_zip()

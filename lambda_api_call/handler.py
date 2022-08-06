@@ -6,7 +6,6 @@ from typing import Dict
 
 import boto3
 import botocore.exceptions
-import requests
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -54,7 +53,9 @@ def lambda_handler(event, context):
     return True
 
 
-def get_forecast(postcode: str = None, forecast_date: str = None) -> Dict:
+def get_forecast(
+    postcode: str = None, forecast_date: str = None, method: str = "urllib"
+) -> Dict:
     if postcode is None:
         postcode = "SW7"
     if forecast_date is None:
@@ -62,9 +63,17 @@ def get_forecast(postcode: str = None, forecast_date: str = None) -> Dict:
     else:
         request_date = datetime.datetime.strptime(forecast_date, "%Y-%m-%d").date()
 
-    result = requests.get(
-        f"https://api.carbonintensity.org.uk/regional/intensity/{request_date.isoformat()}/fw48h/postcode/{postcode}"
-    )
-    result_json = result.text
+    request_url = f"https://api.carbonintensity.org.uk/regional/intensity/{request_date.isoformat()}/fw48h/postcode/{postcode}"
+    
+    if method == "requests":
+        import requests
+
+        result = requests.get(request_url)
+        result_json = result.text
+    else:
+        import urllib
+
+        with urllib.request.urlopen(request_url) as response:
+            result_json = response.read().decode()
 
     return {"forecast_date": request_date.isoformat(), "raw_json": result_json}

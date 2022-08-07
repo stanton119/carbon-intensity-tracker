@@ -28,4 +28,4 @@ class CodePipelineStack(Stack):
             ),
         )
 
-        pipeline.add_stage(lambda_api_call.MyPipelineAppStage(self, "test"))
+        pipeline.add_stage(lambda_api_call.MyPipelineAppStage(self, "prod"))

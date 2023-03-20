@@ -3,9 +3,8 @@ import os
 
 import aws_cdk as cdk
 
-from stacks.lambda_api_call import LambdaAPICallStack
 from stacks.code_pipeline import CodePipelineStack
-
+from stacks.lambda_api_call import LambdaAPICallStack
 
 app = cdk.App()
 CodePipelineStack(app, "CodePipelineStack")

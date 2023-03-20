@@ -1,3 +1,4 @@
 # cdk stuff
 aws-cdk-lib
 constructs
+python-dotenv

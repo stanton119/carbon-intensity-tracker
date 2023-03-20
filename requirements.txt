@@ -1,6 +1,7 @@
 # cdk stuff
 aws-cdk-lib
 constructs
+python-dotenv
 
 # lambda stuff
 boto3

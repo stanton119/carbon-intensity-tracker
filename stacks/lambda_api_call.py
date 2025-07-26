@@ -59,7 +59,7 @@ class LambdaAPICallStack(Stack):
             code=aws_lambda.Code.from_asset(str(zip_path)),
             handler="handler.lambda_handler",
             timeout=Duration.seconds(10),
-            runtime=aws_lambda.Runtime.PYTHON_3_9,
+            runtime=aws_lambda.Runtime.PYTHON_3_12,
             memory_size=128,
             description="Call Carbon Intensity API.",
         )

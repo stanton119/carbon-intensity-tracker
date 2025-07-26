@@ -4,6 +4,7 @@ from pathlib import Path
 
 import dotenv
 from aws_cdk import App, Duration, Stack, pipelines
+from aws_cdk.aws_codebuild import LinuxBuildImage
 from constructs import Construct
 
 from . import lambda_api_call
@@ -33,6 +34,11 @@ class CodePipelineStack(Stack):
                     "python -m pip install -r requirements-cdk.txt",
                     "cdk synth",
                 ],
+            ),
+            code_build_defaults=pipelines.CodeBuildOptions(
+                build_environment={
+                    "build_image": LinuxBuildImage.STANDARD_7_0,  # Node 18+
+                }
             ),
         )
 
